@@ -1,5 +1,4 @@
-# This example will take a Heure log and output an Journalée log
-# The Journalée log format is based in the Horaire format.
+# This will take a detailed log and output a daily log based in the Horaire format
 
 require_relative '../tablatal.rb'
 require_relative '../indental.rb'
@@ -50,4 +49,3 @@ det.each do |date, content|
 end
 
 puts table
-pp Tablatal.parse(table)
