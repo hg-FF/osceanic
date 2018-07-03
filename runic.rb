@@ -96,25 +96,8 @@ class Runic
 			char = line.strip[0]
 			rune = Runic.runes[char.to_sym]
 			trail = line[1]
-			lin = line[2, line.length - 1]
+			lin = Markup.parse(line[2, line.length - 1])
 
-			if char == "/"
-				html += "<p>#{eval(lin)}</p>"
-				next
-			end
-
-			if char == "%"
-				html += Runic.media(lin)
-				next
-			end
-
-			if char == "@"
-				html += Runic.quote(lin)
-				next
-			end
-
-			line = Markup.parse(line)
-			
 			next if line == nil || line.strip == ""
 			if rune == nil
 				warn "Unknown rune: '#{char}'|'#{line}'"
@@ -130,6 +113,21 @@ class Runic
 				html += @@stash.render
 			end
 
+			if char == "/"
+				html += "<p>#{eval(lin)}</p>"
+				next
+			end
+
+			if char == "%"
+				html += Runic.media(lin)
+				next
+			end
+
+			if char == "@"
+				html += Runic.quote(lin)
+				next
+			end
+			
 			if rune[:stash] == true
 				@@stash.add(rune, lin)
 				next
@@ -166,3 +164,7 @@ class Runic
 		rune[:tag] ? "<#{rune[:tag]} class='#{rune[:class]}'>#{line}</#{rune[:tag]}>" : line
 	end
 end
+
+puts Runic.parse "
+& A {_Hello_}
+"
