@@ -59,13 +59,3 @@ class Indental
 		}
 	end
 end
-
-puts Indental.parse "
-18N01
-	note : Lost musical inspiration.
-	logs
-		one
-			code : 324
-			term : Porting
-			desc : Port Oscean formats to Ruby
-", "\t"
